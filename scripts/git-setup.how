@@ -1,0 +1,68 @@
+# create github account, add yourself to collaborators: done in the web-browser
+
+## create your own github account at https://github.com/signup/free
+## after your account is created make sure you are logged off 
+
+## now login as pytug
+## go to "Account Settings" -> "Repositories" -> "pytug/main" -> "Settings" -> "Collaborators" and add your previously created github account to the collaborators
+
+
+# create a public/private key-pair (to be able to commit to github): done in your virtual ubuntu terminal
+# and add it to your github account: done in the web-browser
+
+## generate the key-pair
+ssh-keygen -t rsa -C "your@email.ha"
+## no need to create a passphrase, just hit "enter" when asked for one
+
+## view your public key
+cat ~/.ssh/id_rsa.pub
+
+## copy the output from above command and paste it your github's account to:
+## "Account Settings" -> "SSH Keys" -> "Add SSH key" and save by "Add key"
+## NB! the key you are inserting should be starting with ssh-rsa ... and ending with your email address, no extra lines, no extra spaces!
+
+
+# setup git, test by making your first commit: done in your virtual ubuntu terminal
+
+## install git and dependencies, configure it with your name and email
+sudo apt-get -y install git
+git config --global user.name "Here comes Your Name"
+git config --global user.email your@email.ha
+
+## clone pytug's repository from github to some location (here the location is ~/Desktop/pytug)
+mkdir ~/Desktop/pytug
+cd ~/Desktop/pytug
+git clone git@github.com:pytug/main.git
+cd main/
+
+## map the remote repository with some friendly name (here it is "pytug")
+git remote add pytug git@github.com:pytug/main.git
+
+## see if you got the contents of the repository (for now only the README.md should be there)
+ls
+
+## add there some line of text for testing
+nano README.md 
+
+## add your changes to the local repository, commit these changes (you will be asked to write a commit-message while commiting), and push the changes to the pytug's repository
+git add -A
+git commit
+git push pytug
+
+## test that your changes were commited
+firefox https://github.com/pytug/main/blob/master/README.md
+
+
+# after this, every time you start working with the code do following:
+
+## go to your local repository working directory
+cd ~/Desktop/pytug/main
+
+## pull the latest changes from the remote repository's master's branch
+git pull pytug master
+
+## do your changes
+## add the changes to your local repository, commit (with a message), and push
+git add -A
+git commit
+git push pytug
