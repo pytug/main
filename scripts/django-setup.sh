@@ -116,8 +116,11 @@ a2ensite $DOMAIN
 apt-get build-dep python-mysqldb
 /srv/my_project/venv/bin/pip install MySQL-python
 
-# set permissions to the project to our created system user and restart apache
+# set permissions to the project to our created system user and group, addyourself to the group  and restart apache
 chown -R $WSGI_USER:$WSGI_USER /srv/my_project/
+chmod -R g+w /srv/my_project
+adduser $(whoami) $WSGI_USER
+# will need to log out and in, for new group memebership to take effect
 service apache2 restart
 
 #### MANUALLY #############
