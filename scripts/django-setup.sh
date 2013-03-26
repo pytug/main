@@ -141,3 +141,6 @@ service apache2 restart
 
 ## TODO
 ## more useful things to do
+
+# symlink our virtualenv python to /usr/bin/python
+ln -s /srv/my_project/venv/bin/python /usr/bin/python
