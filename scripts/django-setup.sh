@@ -3,6 +3,7 @@
 ## some commands are using relative paths, i.e. it is imoprtant that they are executed in the order that they are given.
 
 ## define variables suiting your environment
+USERNAME=armen
 HOSTNAME=pytug
 DOMAIN=$HOSTNAME.com
 DB_NAME=pytugdb
@@ -119,7 +120,7 @@ apt-get build-dep python-mysqldb
 # set permissions to the project to our created system user and group, addyourself to the group  and restart apache
 chown -R $WSGI_USER:$WSGI_USER /srv/my_project/
 chmod -R g+w /srv/my_project
-adduser $(whoami) $WSGI_USER
+adduser $USERNAME $WSGI_USER
 # will need to log out and in, for new group memebership to take effect
 service apache2 restart
 
