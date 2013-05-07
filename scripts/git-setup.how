@@ -29,11 +29,10 @@ sudo apt-get -y install git
 git config --global user.name "Here comes Your Name"
 git config --global user.email your@email.ha
 
-## clone pytug's repository from github to some location (here the location is ~/Desktop/pytug)
-mkdir ~/Desktop/pytug
-cd ~/Desktop/pytug
+## clone pytug's repository from github to some location (here the location is /srv/my_project/app/)
+cd /srv/my_project/app
 git clone git@github.com:pytug/main.git
-cd main/
+cd main
 
 ## map the remote repository with some friendly name (here it is "pytug")
 git remote add pytug git@github.com:pytug/main.git
@@ -56,7 +55,7 @@ firefox https://github.com/pytug/main/blob/master/README.md
 # after this, every time you start working with the code do following:
 
 ## go to your local repository working directory
-cd ~/Desktop/pytug/main
+cd /srv/my_project/app/main
 
 ## pull the latest changes from the remote repository's master's branch
 git pull pytug master
