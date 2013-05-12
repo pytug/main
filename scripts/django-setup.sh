@@ -33,7 +33,7 @@ a2dissite default
 # install and configure mysql, variables are defined above
 apt-get -y install mysql-server mysql-client
 echo "CREATE DATABASE $DB_NAME;" | mysql -u root -p
-echo "CREATE USER '$DB_USER'@'localhost' IDENTIFIED BY '$PASSWORD';" | mysql -u root -p
+echo "CREATE USER '$DB_USER'@'localhost' IDENTIFIED BY '$DB_PASSWORD';" | mysql -u root -p
 echo "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'localhost';" | mysql -u root -p
 echo "FLUSH PRIVILEGES;" | mysql -u root -p
 
