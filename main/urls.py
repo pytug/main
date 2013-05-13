@@ -10,6 +10,7 @@ from pyramid import views
 urlpatterns = patterns('',
 #    url(r'^tug/', include('tug.urls')),
     url(r'^pyramid/', include('pyramid.urls')),
+    url(r'^race/', include('race.urls')),
     # Examples:
     # url(r'^$', 'main.views.home', name='home'),
     # url(r'^main/', include('main.foo.urls')),
