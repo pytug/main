@@ -32,10 +32,10 @@ a2dissite default
 
 # install and configure mysql, variables are defined above
 apt-get -y install mysql-server mysql-client
-echo "CREATE DATABASE $DB_NAME;" | mysql -u root -p=$DB_PASSWORD
-echo "CREATE USER '$DB_USER'@'localhost' IDENTIFIED BY '$DB_PASSWORD';" | mysql -u root -p=$DB_PASSWORD
-echo "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'localhost';" | mysql -u root -p=$DB_PASSWORD
-echo "FLUSH PRIVILEGES;" | mysql -u root -p=$DB_PASSWORD
+echo "CREATE DATABASE $DB_NAME;" | mysql -u root --password=$DB_PASSWORD
+echo "CREATE USER '$DB_USER'@'localhost' IDENTIFIED BY '$DB_PASSWORD';" | mysql -u root --password=$DB_PASSWORD
+echo "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'localhost';" | mysql -u root --password=$DB_PASSWORD
+echo "FLUSH PRIVILEGES;" | mysql -u root --password=$DB_PASSWORD
 
 # install python environment and django
 cd /srv/
