@@ -126,6 +126,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'tug',
     'pyramid',
+    'race',
 )
 
 # A sample logging configuration. The only tangible logging
