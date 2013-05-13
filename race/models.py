@@ -20,4 +20,4 @@ class Session(models.Model):
     user = models.ForeignKey(User)
 
     def __unicode__(self):
-        return str(self.date)
+        return self.date.strftime("%d/%m/%Y")
