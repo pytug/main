@@ -46,11 +46,11 @@ virtualenv my_project/venv
 
 # django is installed now, start a django project
 pushd my_project/app/
-/srv/my_project/venv/bin/python /srv/my_project/venv/bin/django-admin.py startproject webapp
+/srv/my_project/venv/bin/python /srv/my_project/venv/bin/django-admin.py startproject main
 popd
 
 # create some folders, and a wsgi file
-mkdir -p my_project/app/webapp/site_media
+mkdir -p my_project/app/main/site_media
 mkdir -p my_project/app/templates
 cd my_project/app/conf/apache/
 
@@ -63,9 +63,9 @@ import sys
 root_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
 sys.path.insert(0, os.path.abspath(os.path.join(root_path, 'venv/lib/python2.7/site-packages/')))
 sys.path.insert(0, os.path.abspath(os.path.join(root_path, 'app')))
-sys.path.insert(0, os.path.abspath(os.path.join(root_path, 'app', 'webapp')))
+sys.path.insert(0, os.path.abspath(os.path.join(root_path, 'app', 'main')))
 
-os.environ['DJANGO_SETTINGS_MODULE'] = 'webapp.settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'main.settings'
 
 import django.core.handlers.wsgi
 application = django.core.handlers.wsgi.WSGIHandler()
@@ -82,10 +82,10 @@ cat >> /etc/apache2/sites-available/$DOMAIN << EOF
 ServerAdmin root@$DOMAIN
 ServerName $DOMAIN
 
-Alias /site_media/ /srv/my_project/app/webapp/site_media/
+Alias /site_media/ /srv/my_project/app/main/site_media/
 Alias /static/ /srv/my_project/venv/lib/python2.7/site-packages/django/contrib/admin/static/
-Alias /robots.txt /srv/my_project/app/webapp/site_media/robots.txt
-Alias /favicon.ico /srv/my_project/app/webapp/site_media/favicon.ico
+Alias /robots.txt /srv/my_project/app/main/site_media/robots.txt
+Alias /favicon.ico /srv/my_project/app/main/site_media/favicon.ico
 
 CustomLog "|/usr/sbin/rotatelogs /srv/my_project/logs/access.log.%Y%m%d-%H%M%S 5M" combined
 ErrorLog "|/usr/sbin/rotatelogs /srv/my_project/logs/error.log.%Y%m%d-%H%M%S 5M"
@@ -95,7 +95,7 @@ WSGIDaemonProcess $DOMAIN user=$WSGI_USER group=$WSGI_USER processes=1 threads=1
 WSGIProcessGroup $DOMAIN
 WSGIScriptAlias / /srv/my_project/app/conf/apache/django.wsgi
 
-<Directory /srv/my_project/app/webapp/site_media>
+<Directory /srv/my_project/app/main/site_media>
 Order deny,allow
 Allow from all
 Options -Indexes FollowSymLinks
@@ -114,7 +114,7 @@ a2ensite $DOMAIN
 
 
 # install mysql module for python
-apt-get build-dep python-mysqldb
+apt-get -y build-dep python-mysqldb
 /srv/my_project/venv/bin/pip install MySQL-python
 
 # set permissions to the project to our created system user and group, addyourself to the group  and restart apache
