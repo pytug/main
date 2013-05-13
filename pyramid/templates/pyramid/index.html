@@ -1,0 +1,9 @@
+{% if latest_session_list %}
+    <ul>
+    {% for session in latest_session_list %}
+        <li><a href="/sessions/{{ session.id }}/">{{ session.date }}</a> full sets done: {{ session.reps }} </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No sessions are available.</p>
+{% endif %}
