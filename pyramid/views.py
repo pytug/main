@@ -13,7 +13,11 @@ def index(request):
 
 
 def detail(request, session_id):
-    return HttpResponse("You're looking at session %s." % session_id)
+    try:
+        session = Session.objects.get(pk=session_id)
+    except Session.DoesNotExist:
+        raise Http404
+    return render(request, 'pyramid/detail.html', {'session': session})
 
 def results(request, session_id):
     return HttpResponse("You're looking at the results of session %s." % session_id)

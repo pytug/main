@@ -1,7 +1,7 @@
 # mapping apps' urls with the project
 
 from django.conf.urls import patterns, include, url
-from tug import views
+from pyramid import views
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -10,7 +10,6 @@ from tug import views
 urlpatterns = patterns('',
 #    url(r'^tug/', include('tug.urls')),
     url(r'^pyramid/', include('pyramid.urls')),
-
     # Examples:
     # url(r'^$', 'main.views.home', name='home'),
     # url(r'^main/', include('main.foo.urls')),
