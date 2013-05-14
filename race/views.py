@@ -6,8 +6,10 @@ from race.models import User, Session
 
 # index view, show last 5 sessions
 def index(request):
-    users = Users.objects.all()
     latest_session_list = Session.objects.order_by('-date')[:5]
+
+#not quite yet needed
+#    users = User.objects.all()
     
     context = { 'latest_session_list': latest_session_list }
     return render(request, 'race/index.html', context)
