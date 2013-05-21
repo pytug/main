@@ -6,7 +6,7 @@ from race.models import User, Session
 
 # index view, show last 5 sessions
 def index(request):
-    latest_session_list = Session.objects.order_by('-date'[:5])
+    latest_session_list = Session.objects.order_by('-date')[:5]
     
 #not quite yet needed
 #    users = User.objects.all()
