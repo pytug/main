@@ -1,0 +1,7 @@
+<form action="">
+<select name="users">
+{% for user in user_list %} 
+    <option value="{{ user }}">{{ user }}</option>
+{% endfor %}
+</select>
+</form>
