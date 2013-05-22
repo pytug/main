@@ -28,3 +28,21 @@ def user(request, user_id):
     except User.DoesNotExist:
         raise Http404
     return HttpResponse(template.render(context))
+
+
+from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponseRedirect, HttpResponse
+from django.core.urlresolvers import reverse
+
+def action(request):
+    try:
+        user_list = User.objects.all()
+#        user = User.objects.get(pk=user_id)
+        template = loader.get_template('race/action.html')
+        context = Context({
+            'user_list': user_list,
+        })
+    except User.DoesNotExist:
+        raise Http404
+    return HttpResponse(template.render(context))
+
