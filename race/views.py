@@ -5,6 +5,7 @@ from django.template import Context, loader
 from django.shortcuts import render
 from race.models import User, Session
 from django.db.models import Max
+from django.http import Http404
 
 # index view, show last 5 sessions
 def index(request):
