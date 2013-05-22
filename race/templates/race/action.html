@@ -1,7 +1,8 @@
-<form action="">
-<select name="users">
+<h2>Record your action power turbo session here</h2>
+<form action="" method="post">
+<select name="user">
 {% for user in user_list %} 
-    <option value="{{ user }}">{{ user }}</option>
+    <option value="{{ user.id }}">{{ user }}</option>
 {% endfor %}
 <input type="text" name="reps">
 <input type="submit" value="reps done!" />
