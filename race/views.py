@@ -9,8 +9,12 @@ from django.db.models import Max
 # index view, show last 5 sessions
 def index(request):
     latest_session_list = Session.objects.order_by('-date')[:5]
-    context = { 'latest_session_list': latest_session_list }
-    return render(request, 'race/index.html', context)
+    template = loader.get_template('race/index.html')
+    context = Context({
+        'latest_session_list': latest_session_list 
+    })
+    return HttpResponse(template.render(context))
+#    return render(request, 'race/index.html', context)
 
 def user(request, user_id):
     try:
