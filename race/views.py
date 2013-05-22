@@ -29,19 +29,36 @@ def user(request, user_id):
         raise Http404
     return HttpResponse(template.render(context))
 
-
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
+from django.utils import timezone
+from django.template import RequestContext
 
 def action(request):
     try:
         user_list = User.objects.all()
-#        user = User.objects.get(pk=user_id)
         template = loader.get_template('race/action.html')
-        context = Context({
+        selected_user = 1
+        reps_done = 0
+        if "user" in request.POST and "reps" in request.POST:
+            selected_user =  request.POST["user"]
+#        if "reps" in request.POST:
+            reps_done = request.POST["reps"]
+        context = RequestContext(request, {
             'user_list': user_list,
+            'selected_user': selected_user,
+            'reps_done': reps_done,
         })
+        if reps_done > 1:
+            s = Session(date=timezone.now(), user_id=selected_user, reps=reps_done)
+            s.save()
+            return HttpResponseRedirect(reverse('index'))
+#        userid = request.POST['user']
+#        if "user" in request.POST:
+#        selected_user =  request.POST["user"] 
+    except ValueError:
+        reps_done = "wrong! one can only pull-up intwise"
     except User.DoesNotExist:
         raise Http404
     return HttpResponse(template.render(context))
