@@ -1,4 +1,11 @@
 <h2>Record your action power turbo session here</h2>
+
+{% if selected_user and reps_done %}
+<p>Are you trying to say you did <strong>{{ reps_done }} number</strong> of reps? Please try a positive integer</p>
+{% else %}
+<p>Choose yourself from the list, input the number of repetitions you have done</p>
+{% endif %}
+
 <form action="." method="post">
 {% csrf_token %}
 <select name="user" id="user">
@@ -10,8 +17,5 @@
 <input type="submit" value="reps done!" />
 </form>
 
-{% if selected_user and reps_done %} 
-<p>You are {{selected_user}} and you did {{reps_done}} pull-ups.</p> 
-{% else %} 
-<p>Choose the value you want and click <em>Submit</em>.</p> 
-{% endif %} 
+
+<p>{{ msg }}</p>

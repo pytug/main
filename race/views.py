@@ -38,8 +38,10 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.template import RequestContext
+from django import template
 
 def action(request):
+    msg = "empty"
     try:
         user_list = User.objects.all()
         template = loader.get_template('race/action.html')
@@ -47,23 +49,17 @@ def action(request):
         reps_done = 0
         if "user" in request.POST and "reps" in request.POST:
             selected_user =  request.POST["user"]
-#        if "reps" in request.POST:
             reps_done = request.POST["reps"]
         context = RequestContext(request, {
             'user_list': user_list,
             'selected_user': selected_user,
             'reps_done': reps_done,
         })
-        if reps_done > 1:
+        if int(reps_done) > 0:
             s = Session(date=timezone.now(), user_id=selected_user, reps=reps_done)
             s.save()
             return HttpResponseRedirect(reverse('index'))
-#        userid = request.POST['user']
-#        if "user" in request.POST:
-#        selected_user =  request.POST["user"] 
     except ValueError:
-        reps_done = "wrong! one can only pull-up intwise"
-    except User.DoesNotExist:
-        raise Http404
+        msg = "value error"
     return HttpResponse(template.render(context))
 
