@@ -18,11 +18,13 @@ def index(request):
 def user(request, user_id):
     try:
         user = User.objects.get(pk=user_id)
+        user_session_count = user.session_set.count()
         user_session_list = Session.objects.filter(user_id=user_id).order_by('-date')
         template = loader.get_template('race/user.html')
         context = Context({
             'user_session_list': user_session_list,
             'user': user,
+            'user_session_count': user_session_count,
         })
     except User.DoesNotExist:
         raise Http404

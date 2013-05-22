@@ -1,9 +1,11 @@
 <h1>User details </h1>
 <p>User: {{ user }} </p>
 <p>Email: {{ user.email }} </p>
+<p>Sessions done: {{ user_session_count }} </p>
 <p>Highest score</p>
 
 <h2>User's history</h2>
+
 <ul>
     {% for session in user_session_list %}
         <li><a href="/sessions/{{ session.id }}/">{{ session.date }}</a> user <a href="/race/{{ session.user_id }}/users/">tug #{{ session.user }}</a> pulled {{ session.reps }} </li>
