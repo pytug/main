@@ -1,4 +1,4 @@
-<h1>User details </h1>
+<h2>User details </h2>
 <p>User: {{ user }} </p>
 <p>Email: {{ user.email }} </p>
 <p>Sessions done: {{ user_session_count }} </p>
@@ -8,6 +8,6 @@
 
 <ul>
     {% for session in user_session_list %}
-        <li><a href="/sessions/{{ session.id }}/">{{ session.date }}</a> user <a href="/race/{{ session.user_id }}/users/">tug #{{ session.user }}</a> pulled {{ session.reps }} </li>
+        <li>{{ session.date }} {{ session.user }} pulled {{ session.reps }} </li>
     {% endfor %}
 </ul>
