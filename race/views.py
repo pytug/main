@@ -9,7 +9,7 @@ from django.http import Http404
 
 # index view, show last 5 sessions
 def index(request):
-    latest_session_list = Session.objects.order_by('-date')[:5]
+    latest_session_list = Session.objects.order_by('-date')[:10]
     template = loader.get_template('race/index.html')
     context = Context({
         'latest_session_list': latest_session_list 
