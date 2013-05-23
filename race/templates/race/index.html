@@ -3,7 +3,7 @@
 {% if latest_session_list %}
     <ul>
     {% for session in latest_session_list %}
-        <li><a href="/sessions/{{ session.id }}/">{{ session.date }}</a> user <a href="/race/user/{{ session.user_id }}/">{{ session.user }}</a> pulled {{ session.reps }} </li>
+        <li>{{ session.date }} : user <a href="/race/user/{{ session.user_id }}/">{{ session.user }}</a> pulled {{ session.reps }} </li>
     {% endfor %}
     </ul>
 
