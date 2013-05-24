@@ -21,7 +21,7 @@ def user(request, user_id):
         user = User.objects.get(pk=user_id)
         user_session_count = user.session_set.count()
         user_session_list = Session.objects.filter(user_id=user_id).order_by('-date')
-        user_session_max = user_session_list.aggregate(Max('reps'))
+        user_session_max = user_session_list.aggregate(Max('reps'))['reps__max']
         template = loader.get_template('race/user.html')
         context = Context({
             'user_session_list': user_session_list,
