@@ -63,3 +63,17 @@ def action(request):
         msg = "value error"
     return HttpResponse(template.render(context))
 
+def topusers(request):
+    user_max_list = []
+    user_list = User.objects.all()
+    for user in user_list:
+        user_session_list = Session.objects.filter(user_id=user.id)
+        user_session_max = { user_session_list.aggregate(Max('reps'))['reps__max']: user.name }
+        user_max_list.append(user_session_max)
+    user_max_list = sorted(user_max_list, reverse=True)[:3]
+    template = loader.get_template('race/topusers.html')
+    context = Context({
+        'user_max_list': user_max_list,
+    })
+    return HttpResponse(template.render(context))
+
